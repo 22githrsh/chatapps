@@ -1,0 +1,44 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Discord</title>
+</head>
+<body>
+    <div class="main w-full flex items-center bg-red-300 justify-center h-screen">
+        <div class="bgimg w-full h-full absolute z-10 top-0 left-0">
+            <img class="w-full h-full object-cover" src="https://images.alphacoders.com/129/1291249.png" alt="">
+        </div>
+        <div class="login w-[450px] relative bg-[#313338] z-20 text-[#F1F2F4] p-7 ">
+            <h1 class="text-center text-2xl font-semibold">Welcom back!</h1>
+            <p class="text-center text-[#B0B5BC]">We're so exited to see you again!</p>
+            <form id="login" action="/register" method="post" class="mt-8">
+                <h1  class="text-[#B0B5BC] text-xs font-semibold ">USERNAME <span class="text-red-600 text-sm">*</span></h1>
+                <input type="text" id="username" name="username" class="my-2 bg-[#1E1F22] w-full py-[7px] rounded-md">
+                <h1  class="text-[#B0B5BC] text-xs font-semibold ">EMAIL <span class="text-red-600 text-sm">*</span></h1>
+                <input type="text" id="username" name="email" class="my-2 bg-[#1E1F22] w-full py-[7px] rounded-md">
+                <h1  class="text-[#B0B5BC] text-xs font-semibold ">NAME <span class="text-red-600 text-sm">*</span></h1>
+                <input type="text" id="username" name="name" class="my-2 bg-[#1E1F22] w-full py-[7px] rounded-md">
+                <h1 class="text-[#B0B5BC] text-xs font-semibold">PASSWORD<span  class="text-red-600 text-sm">*</span></h1>
+                <input type="text" name="password" class="my-2 bg-[#1E1F22] w-full py-[7px] rounded-md">
+            </form>
+            <h1 class="text-xs text-[#0992D8]" >Forgot your password?</h1>
+            <button onclick="register()" class="rounded-md w-full text-center bg-[#4752C4] mt-3 py-2 font-semibold">Register</button>
+            <a class="text-xs mt-2"  href="/login">Already have an account? <span class="text-xs text-[#0992D8]">LOGIN</span></a>
+        </div>
+    </div>
+
+    
+    <script>
+        function register(){
+            document.querySelector("#login").submit();
+        }
+    </script>
+</body>
+</html>
+<!-- 

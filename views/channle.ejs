@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+  <form hidden id="profilform" action="/profile" method="post" enctype="multipart/form-data">
+    <input id="inputprofile" type="file" name="image" />
+  </form>
+  <div class="channlediv hidden absolute w-full h-screen bg-black/70 flex flex-col items-center justify-center z-20">
+    <form class="w-1/3 bg-[#313338] flex flex-col gap-3 p-5 rounded-md" action="/createchannle" method="post">
+      <div class="crrossaswell flex items-center justify-between mb-4">
+        <h1 class="text-white font-semibold text-xl">Create channle</h1>
+        <i id="closechannlescreate" class="ri-close-line text-white text-xl"></i>
+      </div>
+
+      <input class="rounded-md outline-none px-3 py-1" type="text" placeholder="channel name" name="channlename">
+      <input class="rounded-md outline-none px-3 py-1" type="text" placeholder="channel dicription" name="channledis">
+      <input class="w-full bg-[#5865F2] text-white py-1 rounded-md " type="submit" value="submit">
+    </form>
+  </div>
+
+  <div class="main w-full h-screen bg-[#1E1F22] text-[#2B2D31] flex text-white">
+    <div class="iconsection p-2 w-[5%] h-full bg-[#1E1F22] flex flex-col gap-3">
+      <a href="/">
+        <div class="digscordlo w-[50px] h-[50px]">
+          <img class="w-full h-full object-cover rounded-lg"
+            src="https://static.vecteezy.com/system/resources/previews/006/892/625/original/discord-logo-icon-editorial-free-vector.jpg"
+            alt="" />
+        </div>
+  
+      </a>
+
+      <%creteserver.forEach(single=>{%>
+        <a href= "/channle/<%=single._id%>" >
+          <div 
+        class=" w-[45px] bg-white text-[#23A559] h-[45px] flex items-center justify-center rounded-full hover:text-white">
+        <img class="w-full h-full obejct-cover bg-cover rounded-full" src="<%=single.serverimg%>" alt="">
+      </div>
+        </a>
+       <%})%>
+
+          <div
+            class="discordlog w-[45px] bg-[#313338] h-[45px] flex items-center justify-center text-[#23A559] rounded-full hover:bg-[#23A559] hover:text-white">
+            <i class="ri-add-circle-line text-2xl"></i>
+          </div>
+          <div
+            class=" w-[45px] bg-[#313338] text-[#23A559] h-[45px] flex items-center justify-center rounded-full hover:bg-[#23A559] hover:text-white">
+            <i class="ri-compass-3-line text-2xl"></i>
+          </div>
+          <div
+            class=" w-[45px] bg-[#313338] text-[#23A559] h-[50px] flex items-center justify-center rounded-full hover:bg-[#23A559] hover:text-white">
+            <a href="/logout"><i class="ri-logout-box-line text-2xl"></i> </a>
+          </div>
+    </div>
+
+    <div class="main-part2 w-[95%] h-full bg-red-400 flex ">
+      <div class="channleleft w-[25%] h-full bg-[#2B2D31]">
+        <h1 class="px-4 py-3 w-full border-b border-[#1F2124] border-b-2 mb-4">server ka naam</h1>
+        <div class=" px-2 textchannle">
+          <div class="mb-2 textchannelcreate flex items-center justify-between">
+            <h1 class="text-[#80848E]"># Text Channles</h1>
+            <button id="addchannels" class="text-xl bg-[#404249] px-2 rounded-full text-[#80848E]">+</button>
+          </div>
+          <div class="textchannlename w-full h-max flex flex-col gap-1">
+            <%server.textchannels.forEach(elm=>{%>
+
+
+              <div class="textcnlediv bg-[#404249] px-2 flex items-center justify-between py-1 rounded-md">
+                <div onclick="setgroupchat('<%=elm.channlename%>', '<%=elm._id%>')" class="channela-name">
+                  # <%=elm.channlename%>
+                </div>
+                <button onclick="addfriendingroup('<%=elm._id%>')"><i class="ri-user-add-line"></i></button>
+              </div>
+              <%})%>
+
+          </div>
+
+        </div>
+        <!-- <div class=" px-2 voicechannle">
+          <div class="mb-2 textchannelcreate flex items-center justify-between">
+            <h1 class="text-[#80848E]"># Text Channles</h1>
+            <button class="text-xl bg-[#404249] px-2 rounded-full text-[#80848E]"
+              onclick="createtextchannle()">+</button>
+          </div>
+          <div class="textchannlename w-full h-max flex flex-col gap-1">
+            <%server.textchannels.forEach(elm=>{%>
+
+
+              <div class="textcnlediv bg-[#404249] px-2 flex items-center justify-between py-1 rounded-md">
+                <div onclick="setgroupchat('<%=elm.channlename%>', '<%=elm._id%>')" class="channela-name bg-red-400 ">
+                  # <%=elm.channlename%>
+                </div>
+                <button onclick="addmember('<%=elm._id%>')" ><i class="ri-user-add-line"></i></button>
+              </div>
+              <%})%>
+
+          </div>
+
+
+        </div> -->
+      </div>
+      <div class="channleright w-[75%] h-screen bg-[#313338] relative flex items-center justify-center">
+        <img class="object-cover flex items-center justify-center" src="https://ik.imagekit.io/gunj6f9gb/gray-user-profile-icon-png-fP8Q1P.png?updatedAt=1710224268267" alt="">
+
+        <div class="addfrined bg-black/50 hidden absolute top-0 left-0 w-full h-full p-4">
+
+          <div class="addfrinesxlas flex items-center justify-between">
+            <h1>ADD FRIEND</h1>
+            <i id="closeaddfriend" class="ri-close-line"></i>
+          </div>
+          <p class="text-xs">you can addd frined with their Diecord Username</p>
+          <div class="bg-[#2B2D31] p-2 flex justify-between my-2 rounded-md ">
+            <input class="bg-transparent w-full text-sm px-2 outline-none" type="text" id="frinedname"
+              placeholder="you can addd frined with their Diecord Username">
+
+          </div>
+          <div class="searchedfriend">
+
+          </div>
+        </div>
+
+        <div class="areatochat hidden absolute top-0 left-0 w-full h-screen">
+          <div class="topuserinfo w-full h-[60px] bg-[#1E1F22] flex items-center justify-between px-3">
+            <div class="username areatochatname ml-3">username</div>
+            <button onclick="closechatarea()"><i class="ri-close-line"></i></button>
+          </div>
+          <div class="messsagearea w-full h-[82%] bg-[#313338] flex flex-col block gap-2 p-2">
+            <div class="bg-[#1E1F22] py-1 px-2 rounded-t-md rounded-br-md w-max">revcives msg</div>
+            <div class="bg-[#1E1F22] py-1 px-2 rounded-t-md rounded-bl-md w-max ml-auto">send message</div>
+          </div>
+          <div class="inputarea flex w-full">
+            <input id="inputmsg" class="w-[85%] py-[11px] rounded-md px-2 bg-[#1E1F22] text-white" type="text"
+              placeholder="Type a message..." />
+            <input onclick="sendmessage()" class="w-[15%] py-[10px] px-2 bg-[#248046]" type="submit" value="Send" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
+    integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+
+    document.querySelector("#closeaddfriend").addEventListener("click", () => {
+      document.querySelector(".addfrined").classList.add("hidden")
+
+    })
+    document.querySelector("#addchannels").addEventListener("click", () => {
+      document.querySelector(".channlediv").classList.remove("hidden")
+    })
+
+    document.querySelector("#closechannlescreate").addEventListener("click", () => {
+      // alert("DSakdjk")
+      document.querySelector(".channlediv").classList.add("hidden")
+    })
+
+    // document.querySelector("#profiledit").addEventListener("click", () => {
+    //   document.querySelector("#inputprofile").click()
+    // })
+    // document.querySelector("#inputprofile").addEventListener("change", () => {
+    //   document.querySelector("#profilform").submit()
+    // })
+    function closechatarea() {
+      document.querySelector(".areatochat").classList.add("hidden")
+    }
+
+    function addfriendingroup(userid) {
+      document.querySelector(".areatochat").classList.add("hidden")
+      document.querySelector(".addfrined").classList.remove("hidden")
+
+      document.querySelector("#frinedname").addEventListener("keyup", (e) => {
+        var names = e.target.value
+        console.log(names.lenght);
+
+        document.querySelector(".searchedfriend").innerHTML = ""
+
+        if (names !== "") {
+          console.log("asjdhak");
+          axios.get(`/sendfriends/${names}`).then(res => {
+            console.log(res.data);
+            document.querySelector(".searchedfriend").innerHTML = ""
+            res.data.forEach(elm => {
+              const template = `<div class="searchfrnd w-full h-max flex items-center bg-[#2B2D31] py-1 px-2 rounded-md justify-between">
+                  <div class="userinfosearch flex items-center ">
+                    <div class="profileimg w-[45px] h-[45px] bg-[#1E1F22] rounded-full">
+                      <img class="w-full h-full object-cover rounded-full" src="${elm.profilepic}" alt="">
+                    </div>
+                    <h1 class="ml-3">${elm.name}</h1>
+                  </div>
+                  <button id="btn${elm._id}" class="bg-[#248046] px-2 py-1 rounded-md" onclick="adduserinchannle('${elm._id}', '${userid}')">Add In Group</button>
+                  
+                </div>`
+              document.querySelector(".searchedfriend").innerHTML += template
+            })
+
+          })
+        } else {
+
+          document.querySelector(".searchedfriend").innerHTML = ""
+
+        }
+      })
+    }
+
+    function adduserinchannle(userid, channleid) {
+      // console.log(userid);
+      // console.log(channleid);
+      const user = userid
+      const channle = channleid
+
+      const details = {
+        user,
+        channle
+      }
+      // console.log(details);
+      axios.get("/addintochannle", { params: details }).then(res => {
+        console.log(res.data);
+        // document.querySelector(".addfrined").classList.add("hidden")
+        // document.querySelector(".areatochat").classList.remove("hidden")
+
+
+        setgroupchat(res.data.channlename, res.data._id)
+
+      })
+
+    }
+  </script>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+
+    const currentuser = '<%=user.id%>'
+    let reciver = null
+    // console.log(currentuser);
+
+    socket.emit("newuser", currentuser)
+
+    socket.on("group-message", msg=>{
+      console.log(msg.msg);
+    })
+
+    socket.on("newuserishere", userinfo => {
+      console.log(userinfo);
+      onlineuser(userinfo.name, userinfo.userid, userinfo.profile)
+    })
+
+    function onlineuser(username, userid, profile) {
+      if (!document.getElementById(`online${username}`)) {
+
+        var clutter = ""
+        clutter += `<div onclick="setcurrentchat(${profile})" id="online${userid}" class="friend w-full bg-[#313338] py-1 px-1 rounded-md flex items-center">
+            <div class="frndimg w-[50px] h-[50px] bg-black rounded-full">
+              <img class="w-full h-full object-cover rounded-full" src="${profile}" alt=""></div>
+            <h1 class="ml-2">${username}</h1>
+          </div>`
+
+        document.querySelector(".friends").innerHTML = clutter
+
+      }
+    }
+
+    // function setcurrentchat(profile, username, userid) {
+    //   // console.log(profile +  username + userid);
+
+    //   document.querySelector('.areatochat').classList.remove("hidden")
+    //   document.querySelector('.areatochatimg').setAttribute("src", `${profile}`)
+    //   document.querySelector('.areatochatname').textContent = username
+
+    //   reciver = userid;
+    //   getallmsg = {
+    //     reciver,
+    //     currentuser
+    //   }
+
+    //   // console.log(getallmsg);
+    //   socket.emit("getallchats", getallmsg)
+    // }
+
+    function setgroupchat(username, grpid) {
+      document.querySelector('.areatochat').classList.remove("hidden")
+      // document.querySelector('.areatochatimg').setAttribute("src", `${profile}`)
+      document.querySelector('.areatochatname').textContent = username
+      reciver = grpid;
+      getallmsg = {
+        reciver,
+        currentuser
+      }
+      // console.l//og(getallmsg);
+      socket.emit("getallchats", getallmsg)
+
+
+    }
+
+    function sendmessage() {
+
+      const msg = document.querySelector("#inputmsg").value
+      const template = `
+      <div class="bg-[#1E1F22] py-1 px-2 rounded-t-md rounded-bl-md w-max ml-auto">${msg}</div>
+      `
+      document.querySelector(".messsagearea").innerHTML += template
+
+      socket.emit("sendermsg", { reciver, currentuser, msg })
+      document.querySelector("#inputmsg").value = ""
+    }
+
+    function sendmsg(msg) {
+      // const msg = document.querySelector("#inputmsg").value
+      const template = `
+      <div class="bg-[#1E1F22] py-1 px-2 rounded-t-md rounded-bl-md w-max ml-auto">${msg}</div>
+      `
+      document.querySelector(".messsagearea").innerHTML += template
+    }
+
+    function recivemsg(msg) {
+      // const msg = document.querySelector("#inputmsg").value
+      const template = `
+      <div class="bg-[#1E1F22] py-1 px-2 rounded-t-md rounded-br-md w-max">${msg}</div>
+      `
+      document.querySelector(".messsagearea").innerHTML += template
+    }
+
+    socket.on("recivermsg", msg => {
+      // /(msg)\
+      recivemsg(msg)
+      // console.log(msg);
+    })
+
+    socket.on("onlychat", allmsg => {
+      allmsg.forEach(singlemsg => {
+        if (singlemsg.sender === currentuser) {
+          sendmsg(singlemsg.msg)
+        } else {
+          recivemsg(singlemsg.msg)
+        }
+      })
+    })
+
+  
+
+  </script>
+
+
+
+</body>
+
+</html>
